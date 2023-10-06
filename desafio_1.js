@@ -1,18 +1,25 @@
-function formataNome(nome) {
-  const regexNumerosECaracteresEspeciais =
-    /[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\|]/g;
+function formataNome(nome, boolean) {
+  //falta adicionar muitos caracteres especiais
+  const regexNumerosECaracteresEspeciais = /[\u0000-\u0019]|[\u0021-\u0040]|[\u005b-\u0060]|[\u007b-\u00bf]/g;
   const regexEspacosDuplicados = /\s+/g;
   const regexCapitalizar = /\b\w/g;
+  //nao sei se peguei todos os acentos
+  const regexAcentos = /[\u0300-\u036f]/g;
 
-  const nomeFormatado = nome
+  let nomeFormatado = nome
     .replace(regexNumerosECaracteresEspeciais, "")
     .replace(regexEspacosDuplicados, " ")
-    .replace(regexCapitalizar, function (match) {
-      return match.toUpperCase();
-    })
+    .replace(regexCapitalizar, (match) => match.toUpperCase())
     .trim();
+
+  if (boolean) {
+    nomeFormatado = nomeFormatado
+      .normalize("NFKD")
+      .replace(regexAcentos, "")
+      .toUpperCase();
+  }
 
   return nomeFormatado;
 }
 
-module.exports = { formataNome };
+console.log(formataNome("cdigo @  três", false));
