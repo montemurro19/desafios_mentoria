@@ -25,13 +25,19 @@ test("nome com números e caracteres especiais", () => {
 });
 
 test("multiplos espaços", () => {
-  const nome = "  Matheus     Gomes  ";
+  const nome = "  Máthêus   @@  Gomes  ";
   const nomeFormatado = formataNome(nome, false);
-  expect(nomeFormatado).toBe("Matheus Gomes");
+  expect(nomeFormatado).toBe("Máthêus Gomes");
 });
 
 test("caracteres esquisitos do andré", () => {
   const nome = "Matheus £ Gomes ¥";
   const nomeFormatado = formataNome(nome, false);
   expect(nomeFormatado).toBe("Matheus Gomes");
+});
+
+test("teste extra input number", () => {
+  const nome = 123456;
+  const nomeFormatado = formataNome(nome, false);
+  expect(nomeFormatado).toBe("");
 });
