@@ -2,7 +2,6 @@ function validaCpf(input) {
   const regexInputValido = /^[\d.-]+$/;
   const regexPontoTraco = /[.-]/g;
 
-  
   const inputValido = regexInputValido.test(input);
 
   if (!inputValido) {
@@ -49,5 +48,8 @@ function validaCpf(input) {
     raw: raw,
   };
 }
+
+console.log(validaCpf(`44444444444 
+`))
 
 module.exports = { validaCpf };
